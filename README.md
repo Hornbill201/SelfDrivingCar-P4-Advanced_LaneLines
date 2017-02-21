@@ -79,22 +79,26 @@ Here's an example of my output for this step.
 
 ####4. Apply a Region Mask to the Binary Images
 From the previous output, we can find that, the noise of other cars on the side lane may show up in the binary images. which will affect the following polynomial fitting. Therefore, I choose to add a region mask to the binary image in order the cut off the noise on the size lane. 
-The code for my region mask includes a function called `region_of_interest()`, in the 8th code cell of the Jupyter notebook.  The `region_of_interest()` function takes as inputs an image (`img`) as well as the `vertices` which defines the region of interest.  
+The code for my region mask includes a function called `region_of_interest()`, in the 8th code cell of the Jupyter notebook.  The `region_of_interest()` function takes as inputs an image (`img`) as well as the `vertices` which defines the region of interest.
+The region I am using is defined as:
+
+`vertices = np.array([[(120, 710),(280, 0), (1100, 0), (1050,710)]], dtype=np.int32)`
+
 Here's an example of my output for this step. 
 ![img](imgs/6_mask.PNG)
 
-####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+####5. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 I identify and fit my lane lines with a 2nd order polynomial in the function `findlines()`, which can be found in the 10th code cell of the Jupyter notebook. The method I am using is "sliding window" method introduced in the class. Here's an example of my output for this step. 
 
 ![img](imgs/7_window.PNG)
 
-####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+####6. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 I also calculate the radius of curvature of the lane and the position of the vehicle with respect to center the function `findlines()`, by using `np.polyfit`. After getting the radius, I can find the center of the lane, then the position of the car can be easily computed.
 
 
-####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+####7. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 I plot my result back down onto the road such that the lane area is identified clearly in the function `to_real_world_scale()`, which can be found in the 12th code cell of the Jupyter notebook.
 ![img](imgs/8_lines.PNG)
@@ -110,7 +114,7 @@ Here's an example of my output for each frame of the video.
 
 In order to make the curve on the road smooth, I also take the average of the polynomial fitting of the latest 20 frames. After smoothing, the output video is much more stable. The smoothing operation can be found in the function `process_image(input_image)`.
 
-####2. A link to your final video output.  
+####2. A link to my final video output.  
 
 Here's a [link to my video result on YouTube.](https://youtu.be/O91HjPI2B9M)
 
