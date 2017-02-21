@@ -24,17 +24,21 @@ The goals / steps of this project are the following:
 
 The code for this step is contained in the first two code cells of the Jupyter notebook located in "./lanelines.ipynb" 
 
-I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
+I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. I first find the corners of each calibration images. If there are 9x6 corners in the images.
+
+![img](imgs/1_camera_cal.png)
+
+Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-![alt text][image2]
+![img](imgs/2_undist.png)
 
 ###Pipeline (single images)
 
 ####1. Provide an example of a distortion-corrected image.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image3]
+![img](imgs/3_test_undist.png)
 
 ####2. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
@@ -62,7 +66,7 @@ This resulted in the following source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![alt text][image4]
+![img](imgs/4_bird.png)
 
 
 
@@ -71,19 +75,19 @@ I used a combination of color and gradient thresholds to generate a binary image
 The code for my binary transform includes a function called `binary_transform()`, in the 7th code cell of the Jupyter notebook.  The `binary_transform()` function takes as inputs an image (`img`), as well as the kernel size of `sobel` (`sobel_kernel=3`), the color thresholds (`sc_thresh=(110, 255)`), and the x direction gradient threshold (`sx_thresh=(20, 100)`).  
 Here's an example of my output for this step.  
 
-![alt text][image5]
+![img](imgs/5_binary.png)
 
 ####4. Apply a Region Mask to the Binary Images
 From the previous output, we can find that, the noise of other cars on the side lane may show up in the binary images. which will affect the following polynomial fitting. Therefore, I choose to add a region mask to the binary image in order the cut off the noise on the size lane. 
 The code for my region mask includes a function called `region_of_interest()`, in the 8th code cell of the Jupyter notebook.  The `region_of_interest()` function takes as inputs an image (`img`) as well as the `vertices` which defines the region of interest.  
 Here's an example of my output for this step. 
-![alt text][image6]
+![img](imgs/6_mask.png)
 
 ####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 I identify and fit my lane lines with a 2nd order polynomial in the function `findlines()`, which can be found in the 10th code cell of the Jupyter notebook. The method I am using is "sliding window" method introduced in the class. Here's an example of my output for this step. 
 
-![alt text][image7]
+![img](imgs/7_window.png)
 
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -93,7 +97,7 @@ I also calculate the radius of curvature of the lane and the position of the veh
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 I plot my result back down onto the road such that the lane area is identified clearly in the function `to_real_world_scale()`, which can be found in the 12th code cell of the Jupyter notebook.
-![alt text][image8]
+![img](imgs/8_lines.png)
 
 ---
 
@@ -102,11 +106,11 @@ I plot my result back down onto the road such that the lane area is identified c
 ####1. Pipeline of the image processing
 The pipeline of the image processing can be found in `process_image(input_image)`, which is in the 15th code cell of the Jupyter notebook.
 Here's an example of my output for each frame of the video. 
-![alt text][image9]
+![img](imgs/9_final.png)
 
 ####1. A link to your final video output.  
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](https://youtu.be/O91HjPI2B9M)
 
 ---
 
