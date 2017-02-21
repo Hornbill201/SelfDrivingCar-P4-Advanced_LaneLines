@@ -26,7 +26,7 @@ The code for this step is contained in the first two code cells of the Jupyter n
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. I first find the corners of each calibration images. If there are 9x6 corners in the images.
 
-![img](imgs/1_camera_cal.png)
+![img](imgs/1_camera_cal.PNG)
 
 Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
