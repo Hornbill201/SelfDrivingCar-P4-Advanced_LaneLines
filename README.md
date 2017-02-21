@@ -44,9 +44,9 @@ The code for my perspective transform includes a function called `birds_eye_view
 
 ```
     leftupperpoint  = [580,460]
-    rightupperpoint = [740,460] # 700
+    rightupperpoint = [740,460] 
     leftlowerpoint  = [280,680]
-    rightlowerpoint = [1050,680] # 1100
+    rightlowerpoint = [1050,680] 
 
     src = np.float32([leftupperpoint, leftlowerpoint, rightupperpoint, rightlowerpoint])
     dst = np.float32([[200,0], [200,680], [1000,0], [1000,680]])
@@ -74,34 +74,37 @@ Here's an example of my output for this step.
 ![alt text][image5]
 
 ####4. Apply a Region Mask to the Binary Images
-From the previous output, we can find that, the noise of other cars on the side lane may show up in the binary images. which 
-
-
-
+From the previous output, we can find that, the noise of other cars on the side lane may show up in the binary images. which will affect the following polynomial fitting. Therefore, I choose to add a region mask to the binary image in order the cut off the noise on the size lane. 
+The code for my region mask includes a function called `region_of_interest()`, in the 8th code cell of the Jupyter notebook.  The `region_of_interest()` function takes as inputs an image (`img`) as well as the `vertices` which defines the region of interest.  
+Here's an example of my output for this step. 
 ![alt text][image6]
-
 
 ####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+I identify and fit my lane lines with a 2nd order polynomial in the function `findlines()`, which can be found in the 10th code cell of the Jupyter notebook. The method I am using is "sliding window" method introduced in the class. Here's an example of my output for this step. 
 
-![alt text][image5]
+![alt text][image7]
 
 ####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+I also calculate the radius of curvature of the lane and the position of the vehicle with respect to center the function `findlines()`, by using `np.polyfit`. After getting the radius, I can find the center of the lane, then the position of the car can be easily computed.
+
 
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
-
-![alt text][image6]
+I plot my result back down onto the road such that the lane area is identified clearly in the function `to_real_world_scale()`, which can be found in the 12th code cell of the Jupyter notebook.
+![alt text][image8]
 
 ---
 
 ###Pipeline (video)
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+####1. Pipeline of the image processing
+The pipeline of the image processing can be found in `process_image(input_image)`, which is in the 15th code cell of the Jupyter notebook.
+Here's an example of my output for each frame of the video. 
+![alt text][image9]
+
+####1. A link to your final video output.  
 
 Here's a [link to my video result](./project_video.mp4)
 
