@@ -110,7 +110,7 @@ Here's an example of my output for each frame of the video.
 
 ####1. A link to your final video output.  
 
-Here's a [link to my video result](https://youtu.be/O91HjPI2B9M)
+Here's a [link to my video result](https://youtu.be/O91HjPI2B9M){:target="_blank"}
 
 ---
 
