@@ -112,7 +112,7 @@ The pipeline of the image processing can be found in `process_image(input_image)
 Here's an example of my output for each frame of the video. 
 ![img](imgs/9_final.PNG)
 
-In order to make the curve on the road smooth, I also take the average of the polynomial fitting of the latest 20 frames. After smoothing, the output video is much more stable. The smoothing operation can be found in the function `process_image(input_image)`.
+In order to make the green lane-coverage output on the road smooth, I take the average of the polynomial fitting of the latest 20 frames to be the current fitting. The smoothing operation can be found in the function `process_image(input_image)`. After smoothing, the output video is much more stable. 
 
 ####2. A link to my final video output.  
 
