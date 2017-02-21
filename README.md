@@ -108,9 +108,11 @@ The pipeline of the image processing can be found in `process_image(input_image)
 Here's an example of my output for each frame of the video. 
 ![img](imgs/9_final.PNG)
 
-####1. A link to your final video output.  
+In order to make the curve on the road smooth, I also take the average of the polynomial fitting of the latest 20 frames. After smoothing, the output video is much more stable. The smoothing operation can be found in the function `process_image(input_image)`.
 
-Here's a [link to my video result](https://youtu.be/O91HjPI2B9M{:target="_blank"})
+####2. A link to your final video output.  
+
+Here's a [link to my video result on YouTube.](https://youtu.be/O91HjPI2B9M)
 
 ---
 
@@ -118,5 +120,5 @@ Here's a [link to my video result](https://youtu.be/O91HjPI2B9M{:target="_blank"
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+In my first implement, I don't have the "smoothing" and "region mask" in the pipeline. So the output is not stable, especially when the radius of curvature is small (road is more bend) and when the sun light is dazzing. After I add the smoothing operation, it will be much better. On the other hand, when there is a car driving beside my car, the fitted line will be pulled out or disturbed by that car, in order to solve this issue, I add the  `region_of_interest()` function to cut off the side noise as we discussed in Section 4 before. 
 
